@@ -11,7 +11,7 @@ class TestReportSO(unittest.TestCase):
         Primeiro Testesss
         """
         rso = ReportSO()
-        self.assertEqual(rso.getArch(), '64bit')
+        self.assertEqual(rso.get_arch(), '64bit')
 
 
 if __name__ == '__main__':
