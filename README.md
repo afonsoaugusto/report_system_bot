@@ -1,6 +1,8 @@
 # Report System Bot
 
-Projeto Bot Telegram para report de script no servidor
+Projeto Bot Telegram para report e execuçãoes de script no servidor
+
+Tarefas:
 
 ### 1 - Relatórios simples do SO (reportsso.py).
 ### 2 - Criar o bot para executar a lib acima (reportsystembot.py)

@@ -1,18 +1,17 @@
 import unittest
-from reportsystembot.reportso import ReportSO
+from reportsystembot import report
 
-class TestReportSO(unittest.TestCase):
+
+class TestReport(unittest.TestCase):
     """
-    Classe de test dos relatótios
+    Classe de test para obter os comandos
     """
-
-    def test_arch(self):
+    
+    def test_get_command_df(self):
         """
-        Primeiro Testesss
+        Testa o retorno do comando df
         """
-        rso = ReportSO()
-        self.assertEqual(rso.get_arch(), '64bit')
-
+        self.assertEqual(report.get_command('df'), 'df -kh')
 
 if __name__ == '__main__':
     unittest.main()
