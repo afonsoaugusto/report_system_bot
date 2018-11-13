@@ -28,8 +28,7 @@ def get_commands():
 class ReportSO:
 
     def __init__(self):
-        self.format = FormatText()
-        self.commands = get_commands()
+        pass
 
     def get_arch(self):
         return platform.architecture()[0]
@@ -47,8 +46,12 @@ class ReportSO:
         return format_return(return_command)
 
     def get_uname(self):
-        return_command = self.execute_comand('uname -a')
-        return format_return(return_command)
+        return_command = Command('uname -a').execute()
+        return FormatText(return_command).format()
+        
+    def get_return_command(self,command):
+        return_command = Command(command).execute()
+        return FormatText(return_command).format()
 
     def get_filesystems(self):
         return self.execute_comand('df -kh')
