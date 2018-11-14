@@ -58,4 +58,13 @@ class FormatText:
         self.text = text
         
     def format(self):
-        return self.text[0].decode("utf-8")
+        if len(self.text) == 0:
+            return ''
+        elif len(self.text) == 1:
+            return self.text[0].decode("utf-8").replace('\n','')
+        else:
+            re_text = []
+            for phrase in self.text:
+                re_text.append(phrase .decode("utf-8"))
+            re_text[len(re_text)-1] = re_text[len(re_text)-1].replace('\n','')
+            return ''.join(re_text)
