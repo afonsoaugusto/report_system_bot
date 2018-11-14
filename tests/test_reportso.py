@@ -2,6 +2,8 @@ import unittest
 from reportsystembot import report
 from reportsystembot.report import FormatText
 from reportsystembot.report import Command
+from reportsystembot.report import ReportSO
+
 
 
 class TestReport(unittest.TestCase):

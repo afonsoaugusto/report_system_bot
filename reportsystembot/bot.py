@@ -29,9 +29,9 @@ def main():
     updater = Updater(token='793286572:AAGDQRwdShcrw3HCqGSqWkejiv6Fm6XmeS4')
     dispatcher = updater.dispatcher
     
-    command_handler = CommandHandler('command', command, pass_args=True)
-    start_handler = CommandHandler('start', start,Filters.user(username=Users().get_list_users()))
-    uname_handler = CommandHandler('uname', uname)
+    command_handler = CommandHandler('command', command,filters=Filters.user(username=Users().get_list_users()), pass_args=True)
+    start_handler = CommandHandler('start', start,filters=Filters.user(username=Users().get_list_users()))
+    uname_handler = CommandHandler('uname', uname,filters=Filters.user(username=Users().get_list_users()))
     echo_handler = MessageHandler(Filters.text, echo)
     unknown_handler = MessageHandler(Filters.command, unknown)
     

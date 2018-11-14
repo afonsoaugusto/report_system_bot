@@ -3,4 +3,4 @@ class Users:
         pass
         
     def get_list_users(self):
-        return ['@afonsoavr']
+        return ['@afonsoavr','@afonso_dba']
