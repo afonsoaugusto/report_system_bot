@@ -1,3 +1,4 @@
+from users import Users
 from report import ReportSO
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
@@ -29,7 +30,7 @@ def main():
     dispatcher = updater.dispatcher
     
     command_handler = CommandHandler('command', command, pass_args=True)
-    start_handler = CommandHandler('start', start)
+    start_handler = CommandHandler('start', start,Filters.user(username=Users().get_list_users()))
     uname_handler = CommandHandler('uname', uname)
     echo_handler = MessageHandler(Filters.text, echo)
     unknown_handler = MessageHandler(Filters.command, unknown)

@@ -32,29 +32,17 @@ class ReportSO:
 
     def get_arch(self):
         return platform.architecture()[0]
-
-    def get_load_average(self):
-        return_command = Command('w | grep "load average" | awk \'{print $6 " "$7" " $10}\'').execute()
-        return FormatText(return_command).format()
-
-    def get_uptime(self):
-        return_command = self.execute_comand('uptime')
-        return format_return(return_command)
-
-    def get_free(self):
-        return_command = self.execute_comand('free -m')
-        return format_return(return_command)
-
-    def get_uname(self):
-        return_command = Command('uname -a').execute()
-        return FormatText(return_command).format()
         
     def get_return_command(self,command):
         return_command = Command(command).execute()
         return FormatText(return_command).format()
+        
+    def get_load_average(self):
+        return self.get_return_command(get_command('load_avg'))
 
-    def get_filesystems(self):
-        return self.execute_comand('df -kh')
+    def get_uptime(self):
+        return self.get_return_command(get_command('upt'))
+
 
 class Command:
     def __init__(self, command):
