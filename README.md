@@ -1,6 +1,7 @@
 # Report System Bot
 
 [![BCH compliance](https://bettercodehub.com/edge/badge/afonsoaugusto/report_system_bot?branch=master)](https://bettercodehub.com/)
+[![codebeat badge](https://codebeat.co/badges/e7be72b2-8eaf-4427-be95-9250af42d7b3)](https://codebeat.co/projects/github-com-afonsoaugusto-report_system_bot-master)
 
 Name: BB-8 Report System
 Description: Bot para apresentar o retorno do comandos executados no servidor que ele está instanciado.
