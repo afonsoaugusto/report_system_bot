@@ -1,1 +1,5 @@
-export PATH=$PATH:`echo "$(cd "$(dirname "$0")"; pwd -P)/$(basename "$0")"`
+#export PATH=$PATH:`echo "$(cd "$(dirname "$0")"; pwd -P)/$(basename "$0")"`
+#export PATH=$PATH:"$(PWD)"/scripts_teste/
+export PATH=$PATH:`realpath scripts_teste/`
+
+
