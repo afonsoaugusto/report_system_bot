@@ -1,11 +1,14 @@
 # Report System Bot
 
-Projeto Bot Telegram para report e execuçãoes de script no servidor
+Name: BB-8 Report System
+Description: Bot para apresentar o retorno do comandos executados no servidor que ele está instanciado.
+About: BB-8 Report System
+Botpic: Automation and Report
 
 Tarefas:
 
 ### 1 - Relatórios simples do SO (reportsso.py).
-### 2 - Criar o bot para executar a lib acima (reportsystembot.py)
+### 2 - Criar o bot para executar a lib acima (bot.py)
 ### 3 - Autenticação do usuário do bot (authbot.py)
 ### 4 - Rodar no Heroku ou Openshift
 ### 5 - Integrar com Github

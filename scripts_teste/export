@@ -1,0 +1,1 @@
+export PATH=$PATH:`echo "$(cd "$(dirname "$0")"; pwd -P)/$(basename "$0")"`
