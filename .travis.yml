@@ -16,7 +16,7 @@ install:
 before_script: . scripts_teste/export
 
 script:
-  - coverage run --source=nosetests
+  - nosetests --with-coverage
 
 after_success:
   - coveralls
