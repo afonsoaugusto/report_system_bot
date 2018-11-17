@@ -3,5 +3,5 @@ python:
   - "3.6"
 install:
   - pip install -r requirements.txt
-# command to run tests
+before_script: . scripts_teste/export 
 script: nosetests
