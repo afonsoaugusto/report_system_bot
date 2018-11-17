@@ -1,8 +1,8 @@
 import unittest
 from reportsystembot import report
-from reportsystembot.report import FormatText
 from reportsystembot.report import Command
 from reportsystembot.report import CommandList
+from reportsystembot.report import FormatText
 from reportsystembot.report import ReportSO
 
 
