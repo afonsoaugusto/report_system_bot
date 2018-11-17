@@ -1,4 +1,4 @@
-from users import Users
+from base.users import Users
 from report import ReportSO, CommandList
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
@@ -35,9 +35,7 @@ class Bot:
     def help(self,bot, update):
         bot.send_message(chat_id=update.message.chat_id, text=self.command_list.get_commands())
 
-    @staticmethod
-    def command_authorized(bot, update):
-        print(update.message.text)
+    def command_authorized(self,bot, update):
         report = self.rso.report(update.message.text)
         bot.send_message(chat_id=update.message.chat_id, text=report)
 
