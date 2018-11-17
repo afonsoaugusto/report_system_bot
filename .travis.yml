@@ -16,7 +16,7 @@ install:
 before_script: . scripts_teste/export
 
 script:
-  - nosetests --with-coverage tests/test_reportso.py
+  - nosetests --with-coverage
 
 after_success:
   - coveralls
