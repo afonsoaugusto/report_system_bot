@@ -8,7 +8,7 @@ from audit import timed
 class Bot:
 
     def __init__(self):
-        self.logging = logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+        logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                              level=logging.INFO)
         self.updater = Updater(token='793286572:AAGDQRwdShcrw3HCqGSqWkejiv6Fm6XmeS4')
         self.dispatcher = self.updater.dispatcher
@@ -16,23 +16,27 @@ class Bot:
         self.rso = ReportSO()
         self.command_list = CommandList()
 
-    @timed(logging)
-    def start(self,bot, update):
+    @staticmethod
+    def start(bot, update):
         bot.send_message(chat_id=update.message.chat_id, text="I'm a bot, please talk to me!")
 
-    def echo(self,bot, update):
+    @staticmethod
+    def echo(bot, update):
         bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
 
-    def echo_command(self,bot, update):
+    @staticmethod
+    def echo_command(bot, update):
         bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
 
-    def unknown(self,bot, update):
+    @staticmethod
+    def unknown(bot, update):
         bot.send_message(chat_id=update.message.chat_id, text="Comando nao localizado")
 
     def help(self,bot, update):
         bot.send_message(chat_id=update.message.chat_id, text=self.command_list.get_commands())
 
-    def command_authorized(self,bot, update):
+    @staticmethod
+    def command_authorized(bot, update):
         print(update.message.text)
         report = self.rso.report(update.message.text)
         bot.send_message(chat_id=update.message.chat_id, text=report)

@@ -1,4 +1,3 @@
-import platform
 import subprocess
 
 
@@ -6,9 +5,9 @@ class CommandList:
 
     def __init__(self):
         self.list_commands = self.get_commands()
-        pass
 
-    def clear_command(self,command_name):
+    @staticmethod
+    def clear_command(command_name):
         if '/' == command_name[0]:
             command_name = command_name[1:]
         return command_name;
@@ -17,7 +16,8 @@ class CommandList:
         command_name = self.clear_command(command_name)
         return self.list_commands[command_name]
 
-    def get_commands(self):
+    @staticmethod
+    def get_commands():
         return {'os_name'				:	'uname -a | awk {\'print$1\'} | cut -f2 -d\'-\'',\
                 'upt'					:	'uptime | awk {\'print$3\'} | cut -f1 -d\',\'',\
                 'ip_add'				:	'ifconfig | grep "inet addr" | head -2 | tail -1 | awk {\'print$2\'} | cut -f2 -d:',\
@@ -44,7 +44,8 @@ class ReportSO:
         self.command_list = CommandList()
         pass
 
-    def get_return_command(self,command):
+    @staticmethod
+    def get_return_command(command):
         return_command = Command(command).execute()
         return FormatText(return_command).format()
 
