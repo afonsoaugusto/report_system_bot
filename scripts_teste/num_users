@@ -1,0 +1,1 @@
+ w | head -1 | awk '{print $4}' 

@@ -1,5 +1,13 @@
 import subprocess
 
+class Parameter:
+    def __init__(self, name, attribute, value_default=None, optional=True):
+        self.name = name
+        self.attribute = attribute
+        self.value_default = value_default
+        self.optional = optional
+
+
 class Command:
     def __init__(self, command):
         self.command = command

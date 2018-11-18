@@ -1,0 +1,1 @@
+ uname -v | cut -f2 -d'~' | awk {'print $1'} | cut -f1 -d'-' | cut -c 1-5 
