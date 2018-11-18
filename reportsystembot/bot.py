@@ -3,6 +3,7 @@ from report import ReportSO, CommandList
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
 from audit import timed
+from config import Config,TOKEN
 
 
 class Bot:
@@ -10,7 +11,7 @@ class Bot:
     def __init__(self):
         logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                              level=logging.INFO)
-        self.updater = Updater(token='793286572:AAGDQRwdShcrw3HCqGSqWkejiv6Fm6XmeS4')
+        self.updater = Updater(token=Config().variable[TOKEN])
         self.dispatcher = self.updater.dispatcher
         self.list_users = Filters.user(username=Users().get_list_users())
         self.rso = ReportSO()
