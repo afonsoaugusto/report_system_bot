@@ -1,10 +1,13 @@
 import subprocess
 
 class CommandBase:
-    def __init__(self):
-        self.name = 'xpto'
-        self.parameters = []
-        self.desc_help = 'este comando serve para ...'
+    def __init__(self, name, parameters=None, desc_help=None):
+        self.name = name
+        self.parameters = parameters
+        self.desc_help = desc_help
+
+    def __repr__(self):
+        return self.name
 
 class Parameter:
     def __init__(self, name, attribute, value_default=None, optional=True):
@@ -12,7 +15,6 @@ class Parameter:
         self.attribute = attribute
         self.value_default = value_default
         self.optional = optional
-
 
 class Command:
     def __init__(self, command):
