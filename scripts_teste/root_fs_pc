@@ -1,1 +1,0 @@
- df -h /dev/sda1 | tail -1 | awk '{print $5}' 

@@ -1,21 +1,5 @@
 import subprocess
 
-class CommandBase:
-    def __init__(self, name, parameters=None, desc_help=None):
-        self.name = name
-        self.parameters = parameters
-        self.desc_help = desc_help
-
-    def __repr__(self):
-        return self.name
-
-class Parameter:
-    def __init__(self, name, attribute, value_default=None, optional=True):
-        self.name = name
-        self.attribute = attribute
-        self.value_default = value_default
-        self.optional = optional
-
 class Command:
     def __init__(self, command):
         self.command = command
@@ -60,3 +44,19 @@ class CommandList:
                 'last_reboot'			:	'who -b | awk \'{print$3, $4}\'',\
                 'uname'			        :	'uname -a',\
                 'df'					:	'df -kh' }
+
+class CommandBase:
+    def __init__(self, name, parameters=None, desc_help=None):
+        self.name = name
+        self.parameters = parameters
+        self.desc_help = desc_help
+
+    def get_command(self):
+        return Command(self.name)
+
+class Parameter:
+    def __init__(self, name, attribute, value_default=None, optional=True):
+        self.name = name
+        self.attribute = attribute
+        self.value_default = value_default
+        self.optional = optional

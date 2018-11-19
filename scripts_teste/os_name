@@ -1,1 +1,0 @@
- uname -a | awk {'print $1'} | cut -f2 -d'-' 
