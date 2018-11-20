@@ -13,8 +13,6 @@ install:
   - pip install -r requirements.txt
   - pip install coveralls
 
-before_script: . scripts_teste/export
-
 script:
   - nosetests --with-coverage --cover-package=reportsystembot;
 

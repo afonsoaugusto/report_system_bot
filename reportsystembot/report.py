@@ -1,9 +1,9 @@
 try:
-    from base.command import Command
-    from base.command import CommandList
+    from command import Command
+    from command import CommandList
 except:
-    from .base.command import Command
-    from .base.command import CommandList
+    from .command import Command
+    from .command import CommandList
 
 class ReportSO:
 

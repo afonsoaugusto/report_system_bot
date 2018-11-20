@@ -1,6 +1,8 @@
+import os
 import unittest
-from reportsystembot.base.command import Command
-from reportsystembot.base.command import CommandList
+from reportsystembot.command import Command
+from reportsystembot.command import CommandList
+from test.support import EnvironmentVarGuard
 
 
 
@@ -42,6 +44,17 @@ class TestCommand(unittest.TestCase):
     """
     Classe para teste do formatador da saida
     """
+    def setUp(self):
+        absFilePath = os.path.abspath(__file__)                # Absolute Path of the module
+        fileDir = os.path.dirname(os.path.abspath(__file__))   # Directory of the Module
+        parentDir = os.path.dirname(fileDir)                   # Directory of the Module directory
+        path_scripts = os.path.join(parentDir, 'scripts_teste')   # Get the directory for StringFunction
+
+        environ = EnvironmentVarGuard()
+        current_path = environ.get('PATH')
+        new_path = ':'.join([current_path,path_scripts])
+        environ.set('PATH',new_path)
+
 
     def test_command_2_mais_2(self):
         """
