@@ -1,1 +1,1 @@
-simples,simples.sh
+df	--kh | awk '{print$1 " " $4}'	Informa a ocupação dos filesystems locais

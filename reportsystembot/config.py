@@ -3,9 +3,12 @@ from argparse import ArgumentParser
 from collections import ChainMap
 import configparser
 
-TOKEN='token'
+COMMAND_NOT_FOUND='messages.command_not_found'
 DEFAULT='DEFAULT'
 INI_PATH='config.ini'
+TOKEN='token'
+WELCOME='messages.welcome'
+HELP='messages.help'
 
 class Config:
     def __init__(self):

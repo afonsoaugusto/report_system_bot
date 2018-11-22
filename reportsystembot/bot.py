@@ -3,7 +3,7 @@ from report import ReportSO, CommandList
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
 from audit import timed
-from config import Config,TOKEN
+from config import Config,COMMAND_NOT_FOUND,HELP,TOKEN,WELCOME
 
 
 class Bot:
@@ -13,13 +13,13 @@ class Bot:
                              level=logging.INFO)
         self.updater = Updater(token=Config().variable[TOKEN])
         self.dispatcher = self.updater.dispatcher
-        self.list_users = Filters.user(username=Users().get_list_users())
+        self.filter_users = Filters.user(username=Users().get_list_users())
         self.rso = ReportSO()
         self.command_list = CommandList()
 
     @staticmethod
     def start(bot, update):
-        bot.send_message(chat_id=update.message.chat_id, text="I'm a bot, please talk to me!")
+        bot.send_message(chat_id=update.message.chat_id, text=Config().variable[WELCOME])
 
     @staticmethod
     def echo(bot, update):
@@ -31,10 +31,10 @@ class Bot:
 
     @staticmethod
     def unknown(bot, update):
-        bot.send_message(chat_id=update.message.chat_id, text="Comando nao localizado")
+        bot.send_message(chat_id=update.message.chat_id, text=Config().variable[COMMAND_NOT_FOUND])
 
     def help(self,bot, update):
-        bot.send_message(chat_id=update.message.chat_id, text=self.command_list.list_commands)
+        bot.send_message(chat_id=update.message.chat_id, text=Config().variable[HELP])
 
     def command(self,bot, update,args):
         bot.send_message(chat_id=update.message.chat_id, text=self.rso.get_return_command(' '.join(args)))
@@ -44,10 +44,10 @@ class Bot:
         bot.send_message(chat_id=update.message.chat_id, text=report)
 
     def main(self):
-        start_handler = CommandHandler('start', self.start,filters=self.list_users)
-        help_handler = CommandHandler('help', self.help,filters=self.list_users)
-        command_handler = CommandHandler('cl', self.command,pass_args=True,filters=self.list_users)
-        command_authorized_handler = MessageHandler(Filters.command & self.list_users, self.command_authorized)
+        start_handler = CommandHandler('start', self.start,filters=self.filter_users)
+        help_handler = CommandHandler('help', self.help,filters=self.filter_users)
+        command_handler = CommandHandler('cl', self.command,pass_args=True,filters=self.filter_users)
+        command_authorized_handler = MessageHandler(Filters.command & self.filter_users, self.command_authorized)
         echo_handler = MessageHandler(Filters.text, self.echo)
         unknown_handler = MessageHandler(Filters.command, self.unknown)
 

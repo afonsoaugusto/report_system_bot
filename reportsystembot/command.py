@@ -25,6 +25,10 @@ class CommandList:
 
     @staticmethod
     def get_commands():
+        with open('comandos.txt','r') as file:
+            comandos = file.readlines()
+        #comandos = [CommandBase(comandos[:-1]) for usuario in usuarios]
+        
         return {'os_name'				:	'uname -a | awk {\'print$1\'} | cut -f2 -d\'-\'',\
                 'upt'					:	'uptime | awk {\'print$3\'} | cut -f1 -d\',\'',\
                 'ip_add'				:	'ifconfig | grep "inet addr" | head -2 | tail -1 | awk {\'print$2\'} | cut -f2 -d:',\
@@ -53,10 +57,3 @@ class CommandBase:
 
     def get_command(self):
         return Command(self.name)
-
-class Parameter:
-    def __init__(self, name, attribute, value_default=None, optional=True):
-        self.name = name
-        self.attribute = attribute
-        self.value_default = value_default
-        self.optional = optional

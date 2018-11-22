@@ -7,7 +7,6 @@ class Users:
             self.users = self.__load_file()
 
     def __load_file(self):
-        usuarios = []
         with open('usuarios.txt','r') as file:
             usuarios = file.readlines()
         return [User(usuario[:-1]) for usuario in usuarios]
