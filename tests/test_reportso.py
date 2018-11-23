@@ -20,6 +20,12 @@ class TesteRportSO(unittest.TestCase):
         Testa a execução do comando simples
         """
         self.assertEqual('simples', ReportSO().report('/simples'))
+        
+    def test_get_return_command_with_parameter(self):
+        """
+        Testa a execução do comando com parametros
+        """
+        self.assertEqual('t - 5 - s', ReportSO().report('/simples_parametros','t 5 s'))        
 
 class TestReporFormatText(unittest.TestCase):
     """

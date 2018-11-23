@@ -28,12 +28,28 @@ class TestCommandList(unittest.TestCase):
         Testa se comando eh valido
         """
         self.assertTrue(CommandList().is_command_valid('/simples'))
+        self.assertTrue(CommandList().is_command_valid_without_parameters('simples'))        
+               
+    def test_is_command_not_valid(self):
+        """
+        Testa se comando nao eh valido
+        """
+        self.assertFalse(CommandList().is_command_valid('/simples123'))      
+        self.assertFalse(CommandList().is_command_valid_without_parameters('simples123'))              
+        
+    def test_is_command_valid_with_parameters(self):
+        """
+        Testa se comando eh valido
+        """
+        self.assertTrue(CommandList().is_command_valid('/simples_parametros','a  b  c'))        
+        self.assertTrue(CommandList().is_command_valid_with_parameters('simples_parametros','a  b  c'))     
         
     def test_is_command_not_valid(self):
         """
         Testa se comando nao eh valido
         """
-        self.assertFalse(CommandList().is_command_valid('/simples123'))        
+        self.assertFalse(CommandList().is_command_valid('/simples_parametros123','a b c'))      
+        self.assertFalse(CommandList().is_command_valid_with_parameters('simples_parametros123','a b c'))                      
         
 
 class TestCommand(unittest.TestCase):

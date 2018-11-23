@@ -16,13 +16,13 @@ class ReportSO:
         return_command = Command(command).execute()
         return FormatText(return_command).format()
 
-    def report(self,name_command):
-        if self.command_list.is_command_valid(name_command):
+    def report(self,name_command,parameters=None):
+        if self.command_list.is_command_valid(name_command,parameters):
             command_clear = self.command_list.clear_command(name_command)
-            return_command = Command(command_clear).execute()
+            return_command = Command(command_clear,parameters=parameters).execute()
             return FormatText(return_command).format()
         else:
-            return 'Comando não valido.\nConsulte a ajuda com /help'
+            return 'Comando não valido.\nConsulte a ajuda com /help'            
 
     def get_list_commands(self):
         return self.command_list.get_commands_text()
