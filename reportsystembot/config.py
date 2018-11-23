@@ -23,8 +23,4 @@ class Config:
         parser = ArgumentParser()
         parser.add_argument('-t', '--token')
 
-        namespace = parser.parse_args()
-        linha_comando = {k: v for k, v in vars(namespace).items()
-                         if v}
-
-        self.variable = ChainMap(linha_comando, environ, self.defaults)
+        self.variable = ChainMap(environ, self.defaults)
