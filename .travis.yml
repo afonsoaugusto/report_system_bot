@@ -13,10 +13,8 @@ install:
   - pip install -r requirements.txt
   - pip install coveralls
   
-env:
-  - ENVIROMENT=TEST 
-
 script:
+  - export ENVIROMENT=TEST 
   - nosetests --with-coverage --cover-package=reportsystembot;
 
 after_success:
