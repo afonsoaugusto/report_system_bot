@@ -1,4 +1,4 @@
-
+from config import Config,USER_FILENAME
 
 class Users:
     def __init__(self, users=None):
@@ -7,7 +7,7 @@ class Users:
             self.users = self.__load_file()
 
     def __load_file(self):
-        with open('usuarios.txt','r') as file:
+        with open(Config().variable[USER_FILENAME],'r') as file:
             usuarios = file.readlines()
         return [User(usuario[:-1]) for usuario in usuarios]
 

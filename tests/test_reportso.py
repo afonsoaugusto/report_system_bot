@@ -13,8 +13,19 @@ class TesteRportSO(unittest.TestCase):
         """
         Testa a execução do comando teste
         """
-        self.assertEqual('Testes', ReportSO().get_return_command('teste'))
+        self.assertEqual(ReportSO().get_return_command('teste'),'Testes')
 
+    def test_get_return_command_simples(self):
+        """
+        Testa a execução do comando simples
+        """
+        self.assertEqual('simples', ReportSO().report('/simples'))
+
+    def test_is_command_valid(self):
+        """
+        Testa a execução do comando simples
+        """
+        self.assertTrue(ReportSO().report('/simples'))
 
 class TestReporFormatText(unittest.TestCase):
     """
@@ -26,14 +37,14 @@ class TestReporFormatText(unittest.TestCase):
         Testa a formatacao do retorno do comando echo $((2+2))
         """
         dois_mais_dois = Command('echo $((2+2))').execute()
-        self.assertEqual('4',FormatText(dois_mais_dois).format())
+        self.assertEqual(FormatText(dois_mais_dois).format(),'4')
 
     def test_format_command_echo_duas_linhas(self):
         """
         Testa a formatacao do retorno do comando echo "Teste\nNova Linha"
         """
         duas_linhas = Command('echo "Teste\nNova Linha"').execute()
-        self.assertEqual('Teste\nNova Linha',FormatText(duas_linhas).format())
+        self.assertEqual(FormatText(duas_linhas).format(),'Teste\nNova Linha')
 
 if __name__ == '__main__':
     unittest.main()

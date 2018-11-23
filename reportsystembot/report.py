@@ -17,9 +17,18 @@ class ReportSO:
         return FormatText(return_command).format()
 
     def report(self,name_command):
-        command_text = self.command_list.get_command(name_command)
-        return_command = Command(command_text).execute()
-        return FormatText(return_command).format()
+        if self.command_list.is_command_valid(name_command):
+            command_clear = self.command_list.clear_command(name_command)
+            return_command = Command(command_clear).execute()
+            return FormatText(return_command).format()
+        else:
+            return 'Comando não valido.\nConsulte a ajuda com /help'
+
+    def get_list_commands(self):
+        return self.command_list.get_commands_text()
+
+    def get_list_commands_help(self):
+        return self.command_list.get_commands_text_help()
 
 class FormatText:
 

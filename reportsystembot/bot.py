@@ -1,5 +1,5 @@
 from users import Users
-from report import ReportSO, CommandList
+from report import ReportSO
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
 from audit import timed
@@ -15,7 +15,6 @@ class Bot:
         self.dispatcher = self.updater.dispatcher
         self.filter_users = Filters.user(username=Users().get_list_users())
         self.rso = ReportSO()
-        self.command_list = CommandList()
 
     @staticmethod
     def start(bot, update):
@@ -34,7 +33,7 @@ class Bot:
         bot.send_message(chat_id=update.message.chat_id, text=Config().variable[COMMAND_NOT_FOUND])
 
     def help(self,bot, update):
-        bot.send_message(chat_id=update.message.chat_id, text=Config().variable[HELP])
+        bot.send_message(chat_id=update.message.chat_id, text=self.rso.get_list_commands_help())
 
     def command(self,bot, update,args):
         bot.send_message(chat_id=update.message.chat_id, text=self.rso.get_return_command(' '.join(args)))
