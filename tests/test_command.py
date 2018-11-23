@@ -22,6 +22,19 @@ class TestCommandList(unittest.TestCase):
         """
         self.assertEqual(CommandList().clear_command('/df -h'), 'df -h')
         self.assertEqual(CommandList().clear_command('/df -h /dev/sda1'), 'df -h /dev/sda1')
+        
+    def test_is_command_valid(self):
+        """
+        Testa se comando eh valido
+        """
+        self.assertTrue(CommandList().is_command_valid('/simples'))
+        
+    def test_is_command_not_valid(self):
+        """
+        Testa se comando nao eh valido
+        """
+        self.assertFalse(CommandList().is_command_valid('/simples123'))        
+        
 
 class TestCommand(unittest.TestCase):
     """

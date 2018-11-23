@@ -21,12 +21,6 @@ class TesteRportSO(unittest.TestCase):
         """
         self.assertEqual('simples', ReportSO().report('/simples'))
 
-    def test_is_command_valid(self):
-        """
-        Testa a execução do comando simples
-        """
-        self.assertTrue(ReportSO().report('/simples'))
-
 class TestReporFormatText(unittest.TestCase):
     """
     Classe para teste do formatador da saida
