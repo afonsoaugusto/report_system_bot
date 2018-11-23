@@ -5,7 +5,7 @@ import configparser
 
 COMMAND_FILENAME='command_filename'
 COMMAND_NOT_FOUND='messages.command_not_found'
-DEFAULT='DEFAULT'
+DEFAULT={'ENVIROMENT':'DEFAULT'}
 INI_PATH='config.ini'
 TOKEN='token'
 USER_FILENAME='user_filename'
@@ -14,10 +14,11 @@ HELP='messages.help'
 
 class Config:
     def __init__(self):
+        enviroment=ChainMap(environ, DEFAULT)['ENVIROMENT']
         # Processing of the INI configuration file
         ini_config = configparser.ConfigParser()
         ini_config.read(INI_PATH)
-        self.defaults = ini_config[DEFAULT]
+        self.defaults = ini_config[enviroment]
 
         parser = ArgumentParser()
         parser.add_argument('-t', '--token')
