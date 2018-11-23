@@ -15,7 +15,7 @@ install:
   
 script:
   - export ENVIROMENT=TEST 
-  - nosetests --with-coverage --cover-package=reportsystembot;
+  - nosetests
 
 after_success:
   - coveralls
