@@ -11,26 +11,22 @@ class Bot:
     def __init__(self):
         logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                              level=logging.INFO)
-        self.updater = Updater(token=Config().variable[TOKEN])
+        self.config = Config()
+        self.updater = Updater(token=self.config.get_config(TOKEN))
         self.dispatcher = self.updater.dispatcher
         self.filter_users = Filters.user(username=Users().get_list_users())
         self.rso = ReportSO()
 
-    @staticmethod
-    def start(bot, update):
-        bot.send_message(chat_id=update.message.chat_id, text=Config().variable[WELCOME])
+    
+    def start(self,bot, update):
+        bot.send_message(chat_id=update.message.chat_id, text=self.config.get_config(WELCOME))
 
     @staticmethod
     def echo(bot, update):
         bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
 
-    @staticmethod
-    def echo_command(bot, update):
-        bot.send_message(chat_id=update.message.chat_id, text=update.message.text)
-
-    @staticmethod
-    def unknown(bot, update):
-        bot.send_message(chat_id=update.message.chat_id, text=Config().variable[COMMAND_NOT_FOUND])
+    def unknown(self,bot, update):
+        bot.send_message(chat_id=update.message.chat_id, text=self.config.get_config(COMMAND_NOT_FOUND))
 
     def help(self,bot, update):
         bot.send_message(chat_id=update.message.chat_id, text=self.rso.get_list_commands_help())

@@ -6,8 +6,9 @@ class Users:
         if self.users is None:
             self.users = self.__load_file()
 
-    def __load_file(self):
-        with open(Config().variable[USER_FILENAME],'r') as file:
+    @staticmethod
+    def __load_file():
+        with open(Config().get_config(USER_FILENAME),'r') as file:
             usuarios = file.readlines()
         return [User(usuario[:-1]) for usuario in usuarios]
 

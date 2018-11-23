@@ -24,3 +24,6 @@ class Config:
         parser.add_argument('-t', '--token')
 
         self.variable = ChainMap(environ, self.defaults)
+
+    def get_config(self,config_name):
+        return self.variable[config_name]
