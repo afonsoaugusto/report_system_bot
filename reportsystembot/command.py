@@ -19,9 +19,7 @@ class Command:
         if None == self.parameters:
             return self.name
 
-        dirty_parameters = [p.strip() for p in self.parameters]
-        parameters = ' '.join(dirty_parameters)
-        comamnd = ' '.join([self.name,parameters])
+        comamnd = ' '.join([self.name,self.parameters.strip()])
         return comamnd
 
     def generate_command_help(self):

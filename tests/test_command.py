@@ -83,45 +83,45 @@ class TestCommand(unittest.TestCase):
         """
         Testa a criação do comando a ser executado passando um parametro
         """
-        command = Command('comando',parameters=['-t tempo'])
+        command = Command('comando',parameters='-t tempo')
         self.assertEqual('comando -t tempo', command.generate_command())
 
     def test_generate_command_name_one_parameter_with_space(self):
         """
         Testa a criação do comando a ser executado passando um parametro com espaço
         """
-        command = Command('comando',parameters=['-t tempo '])
+        command = Command('comando',parameters='-t tempo ')
         self.assertEqual('comando -t tempo', command.generate_command())
-        command = Command('comando',parameters=[' -t tempo'])
+        command = Command('comando',parameters=' -t tempo')
         self.assertEqual('comando -t tempo', command.generate_command())
-        command = Command('comando',parameters=[' -t tempo '])
+        command = Command('comando',parameters=' -t tempo ')
         self.assertEqual('comando -t tempo', command.generate_command())
 
     def test_generate_command_name_two_parameter(self):
         """
         Testa a criação do comando a ser executado passando dois parametros
         """
-        command = Command('comando',parameters=['-t tempo','-d data'])
+        command = Command('comando',parameters='-t tempo -d data')
         self.assertEqual('comando -t tempo -d data', command.generate_command())
 
     def test_generate_command_name_two_parameter_with_spaces(self):
         """
         Testa a criação do comando a ser executado passando dois parametros com espaços
         """
-        command = Command('comando',parameters=['-t tempo ','-d data '])
+        command = Command('comando',parameters='-t tempo -d data ')
         self.assertEqual('comando -t tempo -d data', command.generate_command())
 
     def test_generate_command_name_with_help(self):
         """
         Testa a criação do help do comando com espaços.
         """
-        command = Command('comando',parameters=['-t tempo ','-d data '],desc_help='Comando de teste')
+        command = Command('comando',parameters='-t tempo -d data',desc_help='Comando de teste')
         self.assertEqual('/comando -t tempo -d data\n\t -Comando de teste', command.generate_command_help())
-        command = Command('comando',parameters=['-t tempo ','-d data '],desc_help='Comando de teste ')
+        command = Command('comando',parameters='-t tempo -d data ',desc_help='Comando de teste ')
         self.assertEqual('/comando -t tempo -d data\n\t -Comando de teste', command.generate_command_help())
-        command = Command('comando',parameters=['-t tempo ','-d data '],desc_help=' Comando de teste')
+        command = Command('comando',parameters='-t tempo -d data ',desc_help=' Comando de teste')
         self.assertEqual('/comando -t tempo -d data\n\t -Comando de teste', command.generate_command_help())
-        command = Command('comando',parameters=['-t tempo ','-d data '],desc_help=' Comando de teste ')
+        command = Command('comando',parameters='-t tempo -d data ',desc_help=' Comando de teste ')
         self.assertEqual('/comando -t tempo -d data\n\t -Comando de teste', command.generate_command_help())
 
 if __name__ == '__main__':
