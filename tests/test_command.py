@@ -5,18 +5,10 @@ from reportsystembot.command import CommandList
 from test.support import EnvironmentVarGuard
 
 
-
 class TestCommandList(unittest.TestCase):
     """
     Classe de teste para obter os comandos
     """
-
-    def test_get_command_df(self):
-        """
-        Testa o retorno do comando df
-        """
-        self.assertEqual(CommandList().get_command('df'), 'df -kh')
-        self.assertEqual(CommandList().get_command('/df'), 'df -kh')
 
     def test__clear_command_sem_barra(self):
         """
@@ -30,19 +22,39 @@ class TestCommandList(unittest.TestCase):
         """
         self.assertEqual(CommandList().clear_command('/df -h'), 'df -h')
         self.assertEqual(CommandList().clear_command('/df -h /dev/sda1'), 'df -h /dev/sda1')
-
-    def test_get_command_com_barra(self):
+        
+    def test_is_command_valid(self):
         """
-        Testa o uso de barras nos comandos.
+        Testa se comando eh valido
         """
-        self.assertEqual(CommandList().get_command('/uname'), 'uname -a')
-
-
-
+        self.assertTrue(CommandList().is_command_valid('/simples'))
+        self.assertTrue(CommandList().is_command_valid_without_parameters('simples'))        
+               
+    def test_is_command_not_valid(self):
+        """
+        Testa se comando nao eh valido
+        """
+        self.assertFalse(CommandList().is_command_valid('/simples123'))      
+        self.assertFalse(CommandList().is_command_valid_without_parameters('simples123'))              
+        
+    def test_is_command_valid_with_parameters(self):
+        """
+        Testa se comando eh valido
+        """
+        self.assertTrue(CommandList().is_command_valid('/simples_parametros','a  b  c'))        
+        self.assertTrue(CommandList().is_command_valid_with_parameters('simples_parametros','a  b  c'))     
+        
+    def test_is_command_not_valid(self):
+        """
+        Testa se comando nao eh valido
+        """
+        self.assertFalse(CommandList().is_command_valid('/simples_parametros123','a b c'))      
+        self.assertFalse(CommandList().is_command_valid_with_parameters('simples_parametros123','a b c'))                      
+        
 
 class TestCommand(unittest.TestCase):
     """
-    Classe para teste do formatador da saida
+    Classe para teste da execução de comandos no SO.
     """
     def setUp(self):
         absFilePath = os.path.abspath(__file__)                # Absolute Path of the module
@@ -54,7 +66,6 @@ class TestCommand(unittest.TestCase):
         current_path = environ.get('PATH')
         new_path = ':'.join([current_path,path_scripts])
         environ.set('PATH',new_path)
-
 
     def test_command_2_mais_2(self):
         """
@@ -69,6 +80,63 @@ class TestCommand(unittest.TestCase):
         """
         comando = Command('echo "Teste\nNova Linha"')
         self.assertEqual([b'Teste\n',b'Nova Linha\n'], comando.execute())
+
+    def test_generate_command_name(self):
+        """
+        Testa a criação do comando a ser executado passando apenas o nome
+        """
+        command = Command('comando')
+        self.assertEqual('comando', command.generate_command())
+
+    def test_generate_command_name_one_parameter(self):
+        """
+        Testa a criação do comando a ser executado passando um parametro
+        """
+        command = Command('comando',parameters=['-t tempo'])
+        self.assertEqual('comando -t tempo', command.generate_command())
+
+    def test_generate_command_name_one_parameter_with_space(self):
+        """
+        Testa a criação do comando a ser executado passando um parametro com espaço
+        """
+        command = Command('comando',parameters=['-t tempo '])
+        self.assertEqual('comando -t tempo', command.generate_command())
+        command = Command('comando',parameters=[' -t tempo'])
+        self.assertEqual('comando -t tempo', command.generate_command())
+        command = Command('comando',parameters=[' -t tempo '])
+        self.assertEqual('comando -t tempo', command.generate_command())
+
+    def test_generate_command_name_two_parameter(self):
+        """
+        Testa a criação do comando a ser executado passando dois parametros
+        """
+        command = Command('comando',parameters=['-t tempo','-d data'])
+        self.assertEqual('comando -t tempo -d data', command.generate_command())
+
+    def test_generate_command_name_two_parameter_with_spaces(self):
+        """
+        Testa a criação do comando a ser executado passando dois parametros com espaços
+        """
+        command = Command('comando',parameters=['-t tempo ','-d data '])
+        self.assertEqual('comando -t tempo -d data', command.generate_command())
+
+    def test_generate_command_name_with_help(self):
+        """
+        Testa a criação do help do comando.
+        """
+        command = Command('comando',parameters=['-t tempo ','-d data '],desc_help='Comando de teste')
+        self.assertEqual('comando -t tempo -d data \nComando de teste', command.generate_command_help())
+
+    def test_generate_command_name_with_help(self):
+        """
+        Testa a criação do help do comando com espaços.
+        """
+        command = Command('comando',parameters=['-t tempo ','-d data '],desc_help='Comando de teste ')
+        self.assertEqual('/comando -t tempo -d data\n\t -Comando de teste', command.generate_command_help())
+        command = Command('comando',parameters=['-t tempo ','-d data '],desc_help=' Comando de teste')
+        self.assertEqual('/comando -t tempo -d data\n\t -Comando de teste', command.generate_command_help())
+        command = Command('comando',parameters=['-t tempo ','-d data '],desc_help=' Comando de teste ')
+        self.assertEqual('/comando -t tempo -d data\n\t -Comando de teste', command.generate_command_help())
 
 if __name__ == '__main__':
     unittest.main()

@@ -12,7 +12,10 @@ sudo: required
 install:
   - pip install -r requirements.txt
   - pip install coveralls
-
+  
+env:
+  - ENVIROMENT=TEST   
+  
 script:
   - nosetests --with-coverage --cover-package=reportsystembot;
 

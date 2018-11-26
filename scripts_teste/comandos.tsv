@@ -1,0 +1,4 @@
+simples		Parametros Simples para Testes
+simples_error		simples error
+simples_parametros	a b c	simples parametros opcionais
+complexo_parametros	-s 45|90 -p <string>	exemplo de script com parametros nomeados
