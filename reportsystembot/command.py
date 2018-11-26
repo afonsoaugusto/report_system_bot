@@ -29,7 +29,7 @@ class Command:
         if None == self.desc_help:
             return self.generate_command()
 
-        help = '\n\t -'.join([self.generate_command(),self.desc_help.strip()])
+        help = '\n\t -'.join(['/'+self.generate_command(),self.desc_help.strip()])
         return help
 
 class CommandList:
@@ -90,8 +90,8 @@ class CommandList:
         
     def get_commands_text(self):
         commands = self.get_commands()
-        return '\n/'.join([c.generate_command() for c in commands])
+        return '\n'.join(['/'.join(c.generate_command() for c in commands])
 
     def get_commands_text_help(self):
         commands = self.get_commands()
-        return '\n\n/'.join([c.generate_command_help() for c in commands])
+        return '\n\n'.join([c.generate_command_help() for c in commands])
