@@ -25,7 +25,7 @@ class TesteRportSO(unittest.TestCase):
         """
         Testa a execução do comando com parametros
         """
-        self.assertEqual('t - 5 - s', ReportSO().report('/simples_parametros','t 5 s'))        
+        self.assertEqual('t - 5 - s', ReportSO().report('/simples_parametros','t 5 s'))
 
 class TestReporFormatText(unittest.TestCase):
     """

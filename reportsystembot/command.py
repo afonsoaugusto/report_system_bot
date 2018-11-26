@@ -1,9 +1,8 @@
-from operator import itemgetter
 import subprocess
 
 try:
     from config import Config, COMMAND_FILENAME
-except:
+except ImportError:
     from .config import Config, COMMAND_FILENAME
 
 class Command:
@@ -28,9 +27,8 @@ class Command:
     def generate_command_help(self):
         if None == self.desc_help:
             return self.generate_command()
-
-        help = '\n\t -'.join(['/'+self.generate_command(),self.desc_help.strip()])
-        return help
+            
+        return '\n\t -'.join(['/'+self.generate_command(),self.desc_help.strip()])
 
 class CommandList:
 
@@ -61,18 +59,18 @@ class CommandList:
         for command in self.list_commands:
             if command.name.lower() == command_name.lower() and not command.parameters:
                 return True
-        return False        
+        return False
         
     def is_command_valid_with_parameters(self,command_name, parameters):
         for command in self.list_commands:
             if command.name.lower() == command_name.lower() and len(command.parameters)>0:
                 return True
-        return False                
-
+        return False
+        
     @staticmethod
     def _split_string_to_command(line):
-        name, parameters, help = line.split('\t')
-        return Command(name,parameters, help)
+        _name, _parameters, _help = line.split('\t')
+        return Command(_name, _parameters, _help)
 
     def get_commands(self):
         with open(Config().variable[COMMAND_FILENAME],'r') as file:
@@ -86,7 +84,7 @@ class CommandList:
         
     def get_commands_name_with_parameter(self):
         commands = self.get_commands()
-        return [c.name for c in commands if len(c.parameters) > 0]        
+        return [c.name for c in commands if len(c.parameters) > 0]
         
     def get_commands_text(self):
         commands = self.get_commands()

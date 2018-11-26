@@ -1,7 +1,7 @@
 try:
     from command import Command
     from command import CommandList
-except:
+except ImportError:
     from .command import Command
     from .command import CommandList
 
@@ -9,7 +9,6 @@ class ReportSO:
 
     def __init__(self):
         self.command_list = CommandList()
-        pass
 
     @staticmethod
     def get_return_command(command):

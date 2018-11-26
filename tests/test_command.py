@@ -22,42 +22,33 @@ class TestCommandList(unittest.TestCase):
         """
         self.assertEqual(CommandList().clear_command('/df -h'), 'df -h')
         self.assertEqual(CommandList().clear_command('/df -h /dev/sda1'), 'df -h /dev/sda1')
-        
+
     def test_is_command_valid(self):
         """
         Testa se comando eh valido
         """
         self.assertTrue(CommandList().is_command_valid('/simples'))
-        self.assertTrue(CommandList().is_command_valid_without_parameters('simples'))        
+        self.assertTrue(CommandList().is_command_valid_without_parameters('simples'))
                
     def test_is_command_not_valid(self):
         """
         Testa se comando nao eh valido
         """
-        self.assertFalse(CommandList().is_command_valid('/simples123'))      
-        self.assertFalse(CommandList().is_command_valid_without_parameters('simples123'))              
+        self.assertFalse(CommandList().is_command_valid('/simples123'))
+        self.assertFalse(CommandList().is_command_valid_without_parameters('simples123'))
         
     def test_is_command_valid_with_parameters(self):
         """
         Testa se comando eh valido
         """
-        self.assertTrue(CommandList().is_command_valid('/simples_parametros','a  b  c'))        
-        self.assertTrue(CommandList().is_command_valid_with_parameters('simples_parametros','a  b  c'))     
-        
-    def test_is_command_not_valid(self):
-        """
-        Testa se comando nao eh valido
-        """
-        self.assertFalse(CommandList().is_command_valid('/simples_parametros123','a b c'))      
-        self.assertFalse(CommandList().is_command_valid_with_parameters('simples_parametros123','a b c'))                      
-        
+        self.assertTrue(CommandList().is_command_valid('/simples_parametros','a  b  c'))
+        self.assertTrue(CommandList().is_command_valid_with_parameters('simples_parametros','a  b  c'))               
 
 class TestCommand(unittest.TestCase):
     """
     Classe para teste da execução de comandos no SO.
     """
     def setUp(self):
-        absFilePath = os.path.abspath(__file__)                # Absolute Path of the module
         fileDir = os.path.dirname(os.path.abspath(__file__))   # Directory of the Module
         parentDir = os.path.dirname(fileDir)                   # Directory of the Module directory
         path_scripts = os.path.join(parentDir, 'scripts_teste')   # Get the directory for StringFunction
@@ -122,15 +113,10 @@ class TestCommand(unittest.TestCase):
 
     def test_generate_command_name_with_help(self):
         """
-        Testa a criação do help do comando.
-        """
-        command = Command('comando',parameters=['-t tempo ','-d data '],desc_help='Comando de teste')
-        self.assertEqual('comando -t tempo -d data \nComando de teste', command.generate_command_help())
-
-    def test_generate_command_name_with_help(self):
-        """
         Testa a criação do help do comando com espaços.
         """
+        command = Command('comando',parameters=['-t tempo ','-d data '],desc_help='Comando de teste')
+        self.assertEqual('/comando -t tempo -d data\n\t -Comando de teste', command.generate_command_help())
         command = Command('comando',parameters=['-t tempo ','-d data '],desc_help='Comando de teste ')
         self.assertEqual('/comando -t tempo -d data\n\t -Comando de teste', command.generate_command_help())
         command = Command('comando',parameters=['-t tempo ','-d data '],desc_help=' Comando de teste')

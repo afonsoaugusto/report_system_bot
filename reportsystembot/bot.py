@@ -2,8 +2,7 @@ from users import Users
 from report import ReportSO
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 import logging
-from audit import timed
-from config import Config,COMMAND_NOT_FOUND,HELP,TOKEN,WELCOME
+from config import Config,COMMAND_NOT_FOUND,TOKEN,WELCOME
 from command import CommandList
 
 
@@ -40,17 +39,17 @@ class Bot:
         report = self.rso.report(update.message.text)
         bot.send_message(chat_id=update.message.chat_id, text=report)
         
-    def command_authorized_paramter(self,bot, update,args):   
+    def command_authorized_paramter(self, bot, update,args):
         command = update.message.text.split(' ')[0]
         report = self.rso.report(command,' '.join(args))
-        bot.send_message(chat_id=update.message.chat_id, text=report)        
+        bot.send_message(chat_id=update.message.chat_id, text=report)
 
     def main(self):
         start_handler = CommandHandler('start', self.start,filters=self.filter_users)
         help_handler = CommandHandler('help', self.help,filters=self.filter_users)
         command_handler = CommandHandler('cl', self.command,pass_args=True,filters=self.filter_users)
-        command_authorized_handler = CommandHandler(self.command_list.get_commands_name_without_parameter(), self.command_authorized, filters=self.filter_users)        
-        command_authorized_parameter_handler = CommandHandler(self.command_list.get_commands_name_with_parameter(), self.command_authorized_paramter,pass_args=True,filters=self.filter_users)        
+        command_authorized_handler = CommandHandler(self.command_list.get_commands_name_without_parameter(), self.command_authorized, filters=self.filter_users)
+        command_authorized_parameter_handler = CommandHandler(self.command_list.get_commands_name_with_parameter(), self.command_authorized_paramter,pass_args=True,filters=self.filter_users)
         echo_handler = MessageHandler(Filters.text, self.echo)
         unknown_handler = MessageHandler(Filters.command, self.unknown)
 
@@ -59,7 +58,7 @@ class Bot:
         self.dispatcher.add_handler(command_handler)
         self.dispatcher.add_handler(echo_handler)
         self.dispatcher.add_handler(command_authorized_handler)
-        self.dispatcher.add_handler(command_authorized_parameter_handler)                
+        self.dispatcher.add_handler(command_authorized_parameter_handler)
         self.dispatcher.add_handler(unknown_handler)
 
         self.updater.start_polling()
