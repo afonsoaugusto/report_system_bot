@@ -132,11 +132,11 @@ class TestCommand(unittest.TestCase):
         Testa a criação do help do comando com espaços.
         """
         command = Command('comando',parameters=['-t tempo ','-d data '],desc_help='Comando de teste ')
-        self.assertEqual('comando -t tempo -d data\n\t -Comando de teste', command.generate_command_help())
+        self.assertEqual('/comando -t tempo -d data\n\t -Comando de teste', command.generate_command_help())
         command = Command('comando',parameters=['-t tempo ','-d data '],desc_help=' Comando de teste')
-        self.assertEqual('comando -t tempo -d data\n\t -Comando de teste', command.generate_command_help())
+        self.assertEqual('/comando -t tempo -d data\n\t -Comando de teste', command.generate_command_help())
         command = Command('comando',parameters=['-t tempo ','-d data '],desc_help=' Comando de teste ')
-        self.assertEqual('comando -t tempo -d data\n\t -Comando de teste', command.generate_command_help())
+        self.assertEqual('/comando -t tempo -d data\n\t -Comando de teste', command.generate_command_help())
 
 if __name__ == '__main__':
     unittest.main()

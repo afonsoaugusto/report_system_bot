@@ -90,7 +90,7 @@ class CommandList:
         
     def get_commands_text(self):
         commands = self.get_commands()
-        return '\n'.join(['/'.join(c.generate_command() for c in commands])
+        return '\n'.join([c.generate_command() for c in commands])
 
     def get_commands_text_help(self):
         commands = self.get_commands()
