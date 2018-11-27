@@ -21,6 +21,12 @@ class TesteRportSO(unittest.TestCase):
         """
         self.assertEqual('simples', ReportSO().report('/simples'))
         
+    def test_get_return_command_simples_uppercase(self):
+        """
+        Testa a execução do comando simples
+        """
+        self.assertEqual('simples', ReportSO().report('/Simples'))        
+        
     def test_get_return_command_with_parameter(self):
         """
         Testa a execução do comando com parametros

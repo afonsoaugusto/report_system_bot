@@ -15,7 +15,8 @@ class ReportSO:
         return_command = Command(command).execute()
         return FormatText(return_command).format()
 
-    def report(self,name_command,parameters=None):
+    def report(self,command,parameters=None):
+        name_command = command.lower()
         if self.command_list.is_command_valid(name_command,parameters):
             command_clear = self.command_list.clear_command(name_command)
             return_command = Command(command_clear,parameters=parameters).execute()
