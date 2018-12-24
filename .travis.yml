@@ -10,8 +10,7 @@ before_install:
 sudo: required
 
 install:
-  - pip install -r requirements.txt
-  - pip install coveralls
+  - pip install -r requirements-dev.txt
   
 env:
   - ENVIROMENT=TEST   
