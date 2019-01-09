@@ -9,4 +9,4 @@
 * Name: BB-8 Report System
 * Description: Bot para apresentar o retorno do comandos executados no servidor que ele está instanciado.
 * About: BB-8 Report System
-* Botpic: Automation and Report
+* Botopic: Automation and Report
