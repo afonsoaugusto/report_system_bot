@@ -1,0 +1,19 @@
+version: 2
+updates:
+- package-ecosystem: pip
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "09:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: python-telegram-bot
+    versions:
+    - "13.1"
+    - "13.2"
+  - dependency-name: coverage
+    versions:
+    - "5.4"
+  - dependency-name: coveralls
+    versions:
+    - 3.0.0
